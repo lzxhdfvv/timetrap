@@ -1,0 +1,17 @@
+ {
+    "format_version": 2,
+    "header": {
+        "name": "TimeTrap",
+        "description": "",
+        "uuid": "0A53FC1C-9D53-FB3F-881B-3FA812033F3C",
+        "version": [ 1, 0, 0 ],
+        "min_engine_version": [ 1, 19, 51 ]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "787B2AB3-03EA-7BAE-4C48-167C119413C7",
+            "version": [ 1, 0, 0 ]
+        }
+    ]
+}
