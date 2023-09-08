@@ -2,20 +2,35 @@
 # 用于玩家的主屏幕显示
 # 先按照玩家的剩余时长来计算显示等级
 execute at @s[scores={time_seconds=0}] as @s run scoreboard players set @s title_level 0
-execute at @s[scores={time_seconds=1..300}] as @s run scoreboard players set @s title_level 1
-execute at @s[scores={time_seconds=301..600}] as @s run scoreboard players set @s title_level 2
-execute at @s[scores={time_seconds=601..900}] as @s run scoreboard players set @s title_level 3
-execute at @s[scores={time_seconds=901..1200}] as @s run scoreboard players set @s title_level 4
-execute at @s[scores={time_seconds=1201..1500}] as @s run scoreboard players set @s title_level 5
-execute at @s[scores={time_seconds=1501..1800}] as @s run scoreboard players set @s title_level 6
-execute at @s[scores={time_seconds=1801..2100}] as @s run scoreboard players set @s title_level 7
-execute at @s[scores={time_seconds=2101..2400}] as @s run scoreboard players set @s title_level 8
-execute at @s[scores={time_seconds=2401..2700}] as @s run scoreboard players set @s title_level 9
-execute at @s[scores={time_seconds=2701..3000}] as @s run scoreboard players set @s title_level 10
-execute at @s[scores={time_seconds=3001..3300}] as @s run scoreboard players set @s title_level 11
-execute at @s[scores={time_seconds=3301..3600}] as @s run scoreboard players set @s title_level 12
+# 没有 hero 标签
+execute at @s[tag=!hero,scores={time_seconds=1..300}] as @s run scoreboard players set @s title_level 1
+execute at @s[tag=!hero,scores={time_seconds=301..600}] as @s run scoreboard players set @s title_level 2
+execute at @s[tag=!hero,scores={time_seconds=601..900}] as @s run scoreboard players set @s title_level 3
+execute at @s[tag=!hero,scores={time_seconds=901..1200}] as @s run scoreboard players set @s title_level 4
+execute at @s[tag=!hero,scores={time_seconds=1201..1500}] as @s run scoreboard players set @s title_level 5
+execute at @s[tag=!hero,scores={time_seconds=1501..1800}] as @s run scoreboard players set @s title_level 6
+execute at @s[tag=!hero,scores={time_seconds=1801..2100}] as @s run scoreboard players set @s title_level 7
+execute at @s[tag=!hero,scores={time_seconds=2101..2400}] as @s run scoreboard players set @s title_level 8
+execute at @s[tag=!hero,scores={time_seconds=2401..2700}] as @s run scoreboard players set @s title_level 9
+execute at @s[tag=!hero,scores={time_seconds=2701..3000}] as @s run scoreboard players set @s title_level 10
+execute at @s[tag=!hero,scores={time_seconds=3001..3300}] as @s run scoreboard players set @s title_level 11
+execute at @s[tag=!hero,scores={time_seconds=3301..3600}] as @s run scoreboard players set @s title_level 12
+# 存在 hero 标签
+execute at @s[tag=hero,scores={time_seconds=1..600}] as @s run scoreboard players set @s title_level 1
+execute at @s[tag=hero,scores={time_seconds=601..1200}] as @s run scoreboard players set @s title_level 2
+execute at @s[tag=hero,scores={time_seconds=1201..1800}] as @s run scoreboard players set @s title_level 3
+execute at @s[tag=hero,scores={time_seconds=1801..2400}] as @s run scoreboard players set @s title_level 4
+execute at @s[tag=hero,scores={time_seconds=2401..3000}] as @s run scoreboard players set @s title_level 5
+execute at @s[tag=hero,scores={time_seconds=3001..3600}] as @s run scoreboard players set @s title_level 6
+execute at @s[tag=hero,scores={time_seconds=3601..4200}] as @s run scoreboard players set @s title_level 7
+execute at @s[tag=hero,scores={time_seconds=4201..4800}] as @s run scoreboard players set @s title_level 8
+execute at @s[tag=hero,scores={time_seconds=4801..5400}] as @s run scoreboard players set @s title_level 9
+execute at @s[tag=hero,scores={time_seconds=5401..6000}] as @s run scoreboard players set @s title_level 10
+execute at @s[tag=hero,scores={time_seconds=6001..6600}] as @s run scoreboard players set @s title_level 11
+execute at @s[tag=hero,scores={time_seconds=6601..7200}] as @s run scoreboard players set @s title_level 12
 # 实际等级
 # 1 -> 1800 秒为 1 ，其余每 300 秒升 1 级。上限 3600 秒。
+# 有 hero 权限上限为 7200 秒。
 # ■ □
 # 显示等级为 1
 # 实际等级为 1
