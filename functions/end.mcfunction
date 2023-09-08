@@ -1,7 +1,7 @@
 # end
 # 玩家结束后的提示
 execute at @s[scores={time_seconds=0}] as @s run scoreboard players set @s title_level 0
-execute at @s[scores={time_seconds=0,endtitle=!33..}] as @s run scoreboard players add @s endtitle 1
+execute at @s[scores={time_seconds=0,endtitle=!34..}] as @s run scoreboard players add @s endtitle 1
 execute at @s[scores={title_level=0,endtitle=1}] as @s run title @s times 1 1000 1
 execute at @s[scores={title_level=0,endtitle=1}] as @s run title @s times 1 1000 1
 execute at @s[scores={title_level=0,endtitle=1}] as @s run effect @s blindness 31 99 true
