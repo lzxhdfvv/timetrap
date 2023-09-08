@@ -1,6 +1,6 @@
 # specialtitle
 execute at @s[scores={time_seconds=600},tag=hero] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
-execute at @s[scores={time_seconds=600},tag=hero] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f剩余时长 §l§65分钟 §r§f。"}]}
+execute at @s[scores={time_seconds=600},tag=hero] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f剩余时长 §l§610分钟 §r§f。"}]}
 execute at @s[scores={time_seconds=300}] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[scores={time_seconds=300}] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f剩余时长 §l§65分钟 §r§f。"}]}
 execute at @s[scores={time_seconds=180}] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
