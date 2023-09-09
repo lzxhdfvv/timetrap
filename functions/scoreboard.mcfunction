@@ -15,6 +15,9 @@ scoreboard objectives add survival_all dummy
 scoreboard objectives add timeconfig dummy
 # 增加时间的倍率
 scoreboard objectives add magnification dummy
+scoreboard objectives add remagnification dummy
+scoreboard players set double remagnification 2
+scoreboard players set ten remagnification 10
 # 用户是否可以添加时间的判定
 scoreboard objectives add canaddtime dummy
 scoreboard objectives add timewilladd dummy

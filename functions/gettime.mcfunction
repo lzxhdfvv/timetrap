@@ -2,9 +2,11 @@
 # 获取时间
 execute at @s as @s run tag @s remove noup
 execute at @s as @s run tag @s remove notime
+execute at @s[scores={time_seconds=!0}] as @s run title @s times 10 70 20
 # 获得 hero 标签
 execute at @s[tag=!getherotitle,hasitem={item=dragon_egg}] as @s run scoreboard players operation @s ishero = ishero ishero
 # 英雄
+execute at @s[tag=!getherotitle,hasitem={item=dragon_egg},scores={ishero=0},tag=!hero] as @s run tag @s add hero_pro
 execute at @s[tag=!getherotitle,hasitem={item=dragon_egg},scores={ishero=0},tag=!hero] as @s run tag @s add hero
 execute at @s[tag=!getherotitle,hasitem={item=dragon_egg},scores={ishero=0},tag=hero] as @s run scoreboard players operation @s time_seconds *= double ishero
 execute at @s[tag=!getherotitle,hasitem={item=dragon_egg},scores={ishero=0},tag=hero] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
@@ -21,23 +23,28 @@ execute at @s[tag=!getherotitle,hasitem={item=dragon_egg},scores={ishero=1},tag=
 execute at @s[tag=!getherotitle,hasitem={item=dragon_egg},scores={ishero=1},tag=!hero] as @s run tag @s add getherotitle
 # 设置玩家的倍率
 # 生存时间设置
-execute at @s[scores={survival_all=0..60}] as @s run scoreboard players set @s magnification 5
-execute at @s[scores={survival_all=61..180}] as @s run scoreboard players set @s magnification 4
-execute at @s[scores={survival_all=181..600}] as @s run scoreboard players set @s magnification 3
-execute at @s[scores={survival_all=681..1200}] as @s run scoreboard players set @s magnification 2
-execute at @s[scores={survival_all=1200..}] as @s run scoreboard players set @s magnification 1
+execute at @s[scores={survival_all=0..30}] as @s run scoreboard players set @s magnification 5
+execute at @s[scores={survival_all=31..60}] as @s run scoreboard players set @s magnification 4
+execute at @s[scores={survival_all=61..120}] as @s run scoreboard players set @s magnification 3
+execute at @s[scores={survival_all=121..600}] as @s run scoreboard players set @s magnification 2
+execute at @s[scores={survival_all=600..}] as @s run scoreboard players set @s magnification 1
 # 累计加时次数加成
 execute at @s[scores={timeaddcount=0}] as @s run scoreboard players add @s magnification 10
 execute at @s[scores={timeaddcount=1..4}] as @s run scoreboard players add @s magnification 3
 execute at @s[scores={timeaddcount=5..9}] as @s run scoreboard players add @s magnification 1
-execute at @s as @s run scoreboard players add @s magnification 0
-execute at @s[scores={magnification=0}] as @s run scoreboard players set @s magnification 1
+# 反向倍率设定
+execute at @s as @s run scoreboard players set @s remagnification 1
+# 作弊者
+execute at @s[tag=cheat] as @s run scoreboard players operation @s remagnification *= ten remagnification
+# 虚荣者
+execute at @s[tag=hero_cheat] as @s run scoreboard players operation @s remagnification *= double remagnification
 # 判断某个用户是否可以消耗某种矿物
 # 煤炭
 execute at @s[tag=!notime,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run tag @s remove cn_coal
 execute at @s[tag=!notime,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = coal timeconfig
 execute at @s[tag=!notime,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_coal
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_coal
@@ -58,6 +65,7 @@ execute at @s[tag=!notime,hasitem={item=iron_ingot,location=slot.weapon.mainhand
 execute at @s[tag=!notime,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = iron timeconfig
 execute at @s[tag=!notime,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_iron
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_iron
@@ -78,6 +86,7 @@ execute at @s[tag=!notime,hasitem={item=copper_ingot,location=slot.weapon.mainha
 execute at @s[tag=!notime,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = copper timeconfig
 execute at @s[tag=!notime,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_copper
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_copper
@@ -98,6 +107,7 @@ execute at @s[tag=!notime,hasitem={item=gold_ingot,location=slot.weapon.mainhand
 execute at @s[tag=!notime,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = gold timeconfig
 execute at @s[tag=!notime,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_gold
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_gold
@@ -118,6 +128,7 @@ execute at @s[tag=!notime,hasitem={item=diamond,location=slot.weapon.mainhand},r
 execute at @s[tag=!notime,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = diamond timeconfig
 execute at @s[tag=!notime,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_diamond
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_diamond
@@ -138,6 +149,7 @@ execute at @s[tag=!notime,hasitem={item=netherite_ingot,location=slot.weapon.mai
 execute at @s[tag=!notime,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = netherite timeconfig
 execute at @s[tag=!notime,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_netherite
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_netherite
@@ -158,6 +170,7 @@ execute at @s[tag=!notime,hasitem={item=raw_copper,location=slot.weapon.mainhand
 execute at @s[tag=!notime,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = raw_copper timeconfig
 execute at @s[tag=!notime,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_raw_copper
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_raw_copper
@@ -178,6 +191,7 @@ execute at @s[tag=!notime,hasitem={item=raw_iron,location=slot.weapon.mainhand},
 execute at @s[tag=!notime,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = raw_iron timeconfig
 execute at @s[tag=!notime,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_raw_iron
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_raw_iron
@@ -198,6 +212,7 @@ execute at @s[tag=!notime,hasitem={item=raw_gold,location=slot.weapon.mainhand},
 execute at @s[tag=!notime,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = raw_gold timeconfig
 execute at @s[tag=!notime,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_raw_gold
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_raw_gold
@@ -218,6 +233,7 @@ execute at @s[tag=!notime,hasitem={item=iron_nugget,location=slot.weapon.mainhan
 execute at @s[tag=!notime,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = iron_nugget timeconfig
 execute at @s[tag=!notime,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_iron_nugget
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_iron_nugget
@@ -238,6 +254,7 @@ execute at @s[tag=!notime,hasitem={item=gold_nugget,location=slot.weapon.mainhan
 execute at @s[tag=!notime,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = gold_nugget timeconfig
 execute at @s[tag=!notime,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_gold_nugget
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_gold_nugget
@@ -258,6 +275,7 @@ execute at @s[tag=!notime,hasitem={item=emerald,location=slot.weapon.mainhand},r
 execute at @s[tag=!notime,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime = @s time_seconds
 execute at @s[tag=!notime,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = emerald timeconfig
 execute at @s[tag=!notime,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s canaddtime += @s timewilladd
 execute at @s[tag=!notime,tag=!hero,scores={level=1,canaddtime=1801..},hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_emerald
 execute at @s[tag=!notime,tag=!hero,scores={level=2,canaddtime=2101..},hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run tag @s add cn_emerald
@@ -277,6 +295,7 @@ execute at @s[tag=!notime,tag=hero,scores={level=7,canaddtime=7201..},hasitem={i
 # 煤炭
 execute at @s[tag=!notime,tag=!cn_coal,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = coal timeconfig
 execute at @s[tag=!notime,tag=!cn_coal,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_coal,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_coal,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_coal,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_coal,hasitem={item=coal,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§0煤炭 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -289,6 +308,7 @@ execute at @s[tag=!notime,tag=cn_coal,hasitem={item=coal,location=slot.weapon.ma
 # 铁锭
 execute at @s[tag=!notime,tag=!cn_iron,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = iron timeconfig
 execute at @s[tag=!notime,tag=!cn_iron,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_iron,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_iron,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_iron,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_iron,hasitem={item=iron_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§f铁锭 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -301,6 +321,7 @@ execute at @s[tag=!notime,tag=cn_iron,hasitem={item=iron_ingot,location=slot.wea
 # 铜锭
 execute at @s[tag=!notime,tag=!cn_copper,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = copper timeconfig
 execute at @s[tag=!notime,tag=!cn_copper,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_copper,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_copper,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_copper,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_copper,hasitem={item=copper_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§2铜锭 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -313,6 +334,7 @@ execute at @s[tag=!notime,tag=cn_copper,hasitem={item=copper_ingot,location=slot
 # 金锭
 execute at @s[tag=!notime,tag=!cn_gold,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = gold timeconfig
 execute at @s[tag=!notime,tag=!cn_gold,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_gold,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_gold,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_gold,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_gold,hasitem={item=gold_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§e金锭 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -325,6 +347,7 @@ execute at @s[tag=!notime,tag=cn_gold,hasitem={item=gold_ingot,location=slot.wea
 # 钻石
 execute at @s[tag=!notime,tag=!cn_diamond,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = diamond timeconfig
 execute at @s[tag=!notime,tag=!cn_diamond,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_diamond,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_diamond,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_diamond,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_diamond,hasitem={item=diamond,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 颗 §l§b钻石 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -337,6 +360,7 @@ execute at @s[tag=!notime,tag=cn_diamond,hasitem={item=diamond,location=slot.wea
 # 下界合金
 execute at @s[tag=!notime,tag=!cn_netherite,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = netherite timeconfig
 execute at @s[tag=!notime,tag=!cn_netherite,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_netherite,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_netherite,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_netherite,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_netherite,hasitem={item=netherite_ingot,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§4下界合金 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -349,6 +373,7 @@ execute at @s[tag=!notime,tag=cn_netherite,hasitem={item=netherite_ingot,locatio
 # 粗铜
 execute at @s[tag=!notime,tag=!cn_raw_copper,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = raw_copper timeconfig
 execute at @s[tag=!notime,tag=!cn_raw_copper,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_raw_copper,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_raw_copper,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_raw_copper,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_raw_copper,hasitem={item=raw_copper,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§2粗铜 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -361,6 +386,7 @@ execute at @s[tag=!notime,tag=cn_raw_copper,hasitem={item=raw_copper,location=sl
 # 粗铁
 execute at @s[tag=!notime,tag=!cn_raw_iron,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = raw_iron timeconfig
 execute at @s[tag=!notime,tag=!cn_raw_iron,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_raw_iron,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_raw_iron,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_raw_iron,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_raw_iron,hasitem={item=raw_iron,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§f粗铁 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -373,6 +399,7 @@ execute at @s[tag=!notime,tag=cn_raw_iron,hasitem={item=raw_iron,location=slot.w
 # 粗金
 execute at @s[tag=!notime,tag=!cn_raw_gold,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = raw_gold timeconfig
 execute at @s[tag=!notime,tag=!cn_raw_gold,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_raw_gold,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_raw_gold,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_raw_gold,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_raw_gold,hasitem={item=raw_gold,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 块 §l§e粗金 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -385,6 +412,7 @@ execute at @s[tag=!notime,tag=cn_raw_gold,hasitem={item=raw_gold,location=slot.w
 # 铁粒
 execute at @s[tag=!notime,tag=!cn_iron_nugget,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = iron_nugget timeconfig
 execute at @s[tag=!notime,tag=!cn_iron_nugget,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_iron_nugget,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_iron_nugget,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_iron_nugget,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_iron_nugget,hasitem={item=iron_nugget,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 粒 §l§f铁粒 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -397,6 +425,7 @@ execute at @s[tag=!notime,tag=cn_iron_nugget,hasitem={item=iron_nugget,location=
 # 金粒
 execute at @s[tag=!notime,tag=!cn_gold_nugget,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = gold_nugget timeconfig
 execute at @s[tag=!notime,tag=!cn_gold_nugget,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_gold_nugget,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_gold_nugget,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_gold_nugget,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_gold_nugget,hasitem={item=gold_nugget,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 粒 §l§e金粒 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}
@@ -409,6 +438,7 @@ execute at @s[tag=!notime,tag=cn_gold_nugget,hasitem={item=gold_nugget,location=
 # 绿宝石
 execute at @s[tag=!notime,tag=!cn_emerald,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd = emerald timeconfig
 execute at @s[tag=!notime,tag=!cn_emerald,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd *= @s magnification
+execute at @s[tag=!notime,tag=!cn_emerald,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s timewilladd /= @s remagnification
 execute at @s[tag=!notime,tag=!cn_emerald,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run scoreboard players operation @s time_seconds += @s timewilladd
 execute at @s[tag=!notime,tag=!cn_emerald,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[tag=!notime,tag=!cn_emerald,hasitem={item=emerald,location=slot.weapon.mainhand},rx=-85] as @s run titleraw @s subtitle {"rawtext":[{"text":"§r§f您消耗了 1 颗 §l§a绿宝石 §r§f换取了 §l§6"},{"score":{"name":"@s","objective":"timewilladd"}},{"text":" 秒 §r§f的生存时间。"}]}

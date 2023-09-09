@@ -1,0 +1,30 @@
+# gamerule
+# 游戏规则
+gamerule commandBlockOutput true
+gamerule commandBlocksEnabled false
+gamerule doDaylightCycle true
+gamerule doEntityDrops true
+gamerule doFireTick true
+gamerule doInsomnia true
+gamerule doMobLoot true
+gamerule doMobSpawning true
+gamerule doTileDrops true
+gamerule doWeatherCycle true
+gamerule drowningDamage true
+gamerule fallDamage true
+gamerule freezeDamage true
+gamerule functionCommandLimit 10000
+gamerule keepInventory false
+gamerule maxCommandChainLength 1
+gamerule mobGriefing true
+gamerule naturalRegeneration true
+gamerule pvp true
+gamerule randomTickSpeed 1
+gamerule respawnblocksexplode true
+gamerule sendCommandFeedback true
+gamerule showBorderEffect true
+gamerule showCoordinates false
+gamerule showTags true
+gamerule showDeathMessages true
+gamerule spawnRadius 1000
+gamerule tntExplodes true

@@ -35,9 +35,3 @@ execute at @s as @s[scores={survival_minutes=60}] run scoreboard players set @s 
 # 显示
 execute at @s[scores={time_seconds=1..}] as @s run function title
 execute at @s[scores={time_seconds=!1..}] as @s run function end
-# 游戏模式
-execute at @s[scores={time_seconds=1..}] as @s run gamemode survival @s[m=!survival]
-execute at @s[scores={time_seconds=!1..}] as @s run gamemode spectator @s[m=!spectator]
-# 游戏规则
-gamerule commandBlocksEnabled false
-gamerule keepInventory false

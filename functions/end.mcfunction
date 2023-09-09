@@ -2,13 +2,11 @@
 # 玩家结束后的提示
 execute at @s[scores={time_seconds=0}] as @s run scoreboard players set @s title_level 0
 execute at @s[scores={time_seconds=0,endtitle=!34..}] as @s run scoreboard players add @s endtitle 1
-execute at @s[scores={title_level=0,endtitle=1}] as @s run title @s times 1 1000 1
-execute at @s[scores={title_level=0,endtitle=1}] as @s run title @s times 1 1000 1
 execute at @s[scores={title_level=0,endtitle=1}] as @s run effect @s blindness 31 99 true
 execute at @s[scores={title_level=0,endtitle=1}] as @s run effect @s slowness 31 99 true
 execute at @s[scores={time_seconds=0}] as @s run scoreboard players set @s title_level 0
-execute at @s[scores={title_level=0,endtitle=1}] as @s run title @s times 1 1000 1
-execute at @s[scores={title_level=0,endtitle=37}] as @s run title @s times 10 70 20
+execute at @s[scores={title_level=0,endtitle=1,time_seconds=0}] as @s run title @s times 1 1000 1
+execute at @s[scores={title_level=0,endtitle=33,time_seconds=0}] as @s run title @s times 10 70 20
 execute at @s[scores={title_level=0,endtitle=1}] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[scores={title_level=0,endtitle=5}] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}
 execute at @s[scores={title_level=0,endtitle=9}] as @s run titleraw @s title {"rawtext":[{"text":"§l"}]}

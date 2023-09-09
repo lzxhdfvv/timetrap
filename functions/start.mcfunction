@@ -24,5 +24,7 @@ execute at @s[tag=!start] as @s run scoreboard players add @s iron_nugget 0
 execute at @s[tag=!start] as @s run scoreboard players add @s timeaddcount 0
 # 结束提示
 execute at @s[tag=!start] as @s run scoreboard players add @s endtitle 0
+# gamemode
+execute at @s[tag=!start] as @s run gamemode survival @s[m=!survival]
 # 完成
 execute at @s[tag=!start] as @s run tag @s add start
