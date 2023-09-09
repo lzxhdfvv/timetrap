@@ -40,5 +40,8 @@ scoreboard objectives add gold_nugget dummy
 scoreboard objectives add iron_nugget dummy
 # 已经添加了多少次时间
 scoreboard objectives add timeaddcount dummy
+# 已经添加了多少次时间
+scoreboard objectives add scores dummy
+scoreboard objectives add scoreswilladd dummy
 # 结束提示
 scoreboard objectives add endtitle dummy

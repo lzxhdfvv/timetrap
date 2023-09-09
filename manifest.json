@@ -4,7 +4,7 @@
         "name": "TimeTrap",
         "description": "",
         "uuid": "0A53FC1C-9D53-FB3F-881B-3FA812033F3C",
-        "version": [ 1, 0, 4 ],
+        "version": [ 1, 0, 5 ],
         "min_engine_version": [ 1, 19, 51 ]
     },
     "modules": [
