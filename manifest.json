@@ -1,16 +1,16 @@
  {
-    "format_version": 2,
+    "format_version": 1,
     "header": {
-        "name": "TimeTrap",
+        "name": "TimeTrap_cn",
         "description": "",
-        "uuid": "0A53FC1C-9D53-FB3F-881B-3FA812033F3C",
-        "version": [ 1, 0, 6 ],
+        "uuid": "0915FE49-6A88-DE07-483C-B702039794BB",
+        "version": [ 1, 0, 5 ],
         "min_engine_version": [ 1, 19, 51 ]
     },
     "modules": [
         {
             "type": "data",
-            "uuid": "787B2AB3-03EA-7BAE-4C48-167C119413C7",
+            "uuid": "F95B6B87-59B2-86A4-0DE4-70D59CA5CEC6",
             "version": [ 1, 0, 0 ]
         }
     ]

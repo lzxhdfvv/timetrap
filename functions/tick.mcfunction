@@ -3,11 +3,11 @@
 scoreboard objectives add tick dummy
 scoreboard players add tick tick 1
 scoreboard players add isscoreboard isscoreboard 1
-execute as @a as @s run scoreboard players operation @s tick = tick tick
-execute as @r[scores={tick=20..}] as @s run function timeconfig
-execute as @a[scores={tick=20..}] as @s run function login
-execute as @r[scores={tick=20..}] as @s run function scoreboard
-execute as @a[scores={tick=20..}] as @s run function seconds
-execute as @a[scores={tick=20..}] as @s run function gamerule
-execute as @r[scores={tick=20..}] as @s run scoreboard players set tick tick 0
-execute as @r as @s run function ac
+execute @a ~ ~ ~ scoreboard players operation @s tick = tick tick
+execute @r[scores={tick=20..}] ~ ~ ~ function timeconfig
+execute @a[scores={tick=20..}] ~ ~ ~ function login
+execute @r[scores={tick=20..}] ~ ~ ~ function scoreboard
+execute @a[scores={tick=20..}] ~ ~ ~ function seconds
+execute @a[scores={tick=20..}] ~ ~ ~ function gamerule
+execute @r[scores={tick=20..}] ~ ~ ~ scoreboard players set tick tick 0
+execute @r ~ ~ ~ function ac
