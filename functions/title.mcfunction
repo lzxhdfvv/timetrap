@@ -2,6 +2,9 @@
 # 用于玩家的主屏幕显示
 # 先按照玩家的剩余时长来计算显示等级
 execute at @s[scores={time_seconds=0}] as @s run scoreboard players set @s title_level 0
+# 数据值溢出的处理
+execute at @s[scores={level=8..}] as @s run scoreboard players set @s level 7
+execute at @s[scores={level=!1..7}] as @s run scoreboard players set @s level 1
 # 没有 hero 标签
 execute at @s[tag=!hero,scores={time_seconds=1..300}] as @s run scoreboard players set @s title_level 1
 execute at @s[tag=!hero,scores={time_seconds=301..600}] as @s run scoreboard players set @s title_level 2
